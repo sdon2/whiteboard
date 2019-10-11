@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+def mainClass = 'client.Client'
+
+group 'whiteboard'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //compile fileTree(dir: 'lib', include: ['*.jar'])
+    compile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClass
+    }
+    from {
+        //configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
