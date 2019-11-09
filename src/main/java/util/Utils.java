@@ -11,7 +11,7 @@ import java.util.Random;
 public class Utils {
     /**
      * Takes in string and returns the associated color object
-     * @param Name of the color
+     * @param colorString Name of the color
      * @return The color
      */
     public static Color colorFromString(String colorString) {

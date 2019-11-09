@@ -33,6 +33,7 @@ public class BoardModel extends JPanel implements Drawable, Identifiable, Serial
 
 	private final BoardIdentifier boardName;
     private final CanvasController canvas;
+    private Identifiable owner;
     private final Set<Identifiable> users;
     
     /**
@@ -41,8 +42,8 @@ public class BoardModel extends JPanel implements Drawable, Identifiable, Serial
      * @param canvas
      */
     // Server only
-    public BoardModel(BoardIdentifier boardName, CanvasController canvas) {
-    	this(boardName, canvas, new Identifiable[]{});
+    public BoardModel(BoardIdentifier boardName, CanvasController canvas, Identifiable owner) {
+    	this(boardName, canvas, new Identifiable[]{}, owner);
     }
     
     /**
@@ -51,11 +52,12 @@ public class BoardModel extends JPanel implements Drawable, Identifiable, Serial
      * @param canvas
      * @param initUsers
      */
-    public BoardModel(BoardIdentifier boardName, CanvasController canvas, Identifiable[] initUsers) {
+    public BoardModel(BoardIdentifier boardName, CanvasController canvas, Identifiable[] initUsers, Identifiable owner) {
         this.boardName = boardName;
         this.canvas = canvas;
         this.users = Collections.synchronizedSet(new HashSet<Identifiable>(Arrays.asList(initUsers)));
         this.setPreferredSize(new Dimension(width(), height()));
+        this.owner = owner;
     }
     
     /**
@@ -198,5 +200,9 @@ public class BoardModel extends JPanel implements Drawable, Identifiable, Serial
 		canvas.canvas().adjustLayer(properties, adjustment);
 		repaint();
 	}
+
+	public Identifiable getOwner() {
+	    return this.owner;
+    }
 	
 }

@@ -1,6 +1,7 @@
 package packet;
 
 import name.BoardIdentifier;
+import name.Identifiable;
 
 /**
  * Class that represents a packet with all the information from client of a new board
@@ -11,6 +12,7 @@ public final class PacketNewBoard extends Packet {
     private final BoardIdentifier boardName;
     private final int width;
     private final int height;
+    private Identifiable owner;
     
     /**
      * Constructor for packet
@@ -18,10 +20,11 @@ public final class PacketNewBoard extends Packet {
      * @param width
      * @param height
      */
-    public PacketNewBoard(BoardIdentifier boardName, int width, int height) {
+    public PacketNewBoard(BoardIdentifier boardName, int width, int height, Identifiable owner) {
     	this.boardName = boardName;
         this.width = width;
         this.height = height;
+        this.owner = owner;
     }
     
     /**
@@ -46,6 +49,10 @@ public final class PacketNewBoard extends Packet {
      */
     public int height() {
         return height;
+    }
+
+    public Identifiable owner() {
+        return owner;
     }
     
     

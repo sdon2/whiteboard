@@ -3,20 +3,9 @@ package server;
 import java.io.IOException;
 import java.net.Socket;
 
+import name.ClientIdentifier;
 import name.Identifiable;
-import packet.Packet;
-import packet.PacketBoardIdentifierList;
-import packet.PacketBoardModel;
-import packet.PacketBoardUsers;
-import packet.PacketClientReady;
-import packet.PacketDrawCommand;
-import packet.PacketExitBoard;
-import packet.PacketJoinBoard;
-import packet.PacketLayerAdjustment;
-import packet.PacketMessage;
-import packet.PacketNewBoard;
-import packet.PacketNewClient;
-import packet.PacketNewLayer;
+import packet.*;
 import canvas.command.DrawCommand;
 
 /**
@@ -117,6 +106,19 @@ public class ServerSocketHandler extends SocketHandler {
 		assert model != null;
 		broadcastPacketToBoard(new PacketBoardUsers(model.users()));
 	}
+
+	@Override
+    public void receivedCanJoinBoardPacket(PacketCanJoinBoard packet) {
+        ClientIdentifier owner = packet.boardName().owner();
+        if (!owner.equals(packet.user()))
+        server.broadcastPacketToClient(packet, owner);
+    }
+
+    @Override
+    public void receivedCanJoinBoardResultPacket(PacketCanJoinBoardResult packet) {
+        ClientIdentifier owner = packet.user();
+        server.broadcastPacketToClient(packet, owner);
+    }
 	
 	/**
 	 * Handles receiving a ClientReadyPacket
@@ -210,7 +212,6 @@ public class ServerSocketHandler extends SocketHandler {
 	
     /**
      * Broadcast a packet to all the clients of a specific model.
-     * @param model
      * @param packet
      */
     private void broadcastPacketToBoard(Packet packet) {

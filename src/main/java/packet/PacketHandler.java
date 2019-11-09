@@ -13,6 +13,8 @@ public interface PacketHandler {
      void receivedNewClientPacket(PacketNewClient packet);
      void receivedNewBoardPacket(PacketNewBoard packet);
      void receivedClientReadyPacket(PacketClientReady packet);
+     void receivedCanJoinBoardPacket(PacketCanJoinBoard packet);
+     void receivedCanJoinBoardResultPacket(PacketCanJoinBoardResult packet);
      void receivedJoinBoardPacket(PacketJoinBoard packet);
      void receivedExitBoardPacket(PacketExitBoard packet);
      void receivedBoardModelPacket(PacketBoardModel packet);

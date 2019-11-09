@@ -6,22 +6,13 @@ import java.net.Socket;
 
 import javax.swing.SwingUtilities;
 
+import dialogs.ConfirmDialog;
+import dialogs.ErrorDialog;
 import models.BoardModel;
 import name.BoardIdentifier;
 import name.ClientIdentifier;
 import name.LayerIdentifier;
-import packet.PacketBoardIdentifierList;
-import packet.PacketBoardModel;
-import packet.PacketBoardUsers;
-import packet.PacketClientReady;
-import packet.PacketDrawCommand;
-import packet.PacketExitBoard;
-import packet.PacketJoinBoard;
-import packet.PacketLayerAdjustment;
-import packet.PacketMessage;
-import packet.PacketNewBoard;
-import packet.PacketNewClient;
-import packet.PacketNewLayer;
+import packet.*;
 import server.SocketHandler;
 import stroke.StrokeProperties;
 import stroke.StrokeType;
@@ -62,6 +53,11 @@ public class ClientController extends SocketHandler {
         // Send a NewClientPacket to announce yourself.
         sendPacket(new PacketNewClient(user));
     }
+
+
+    public ClientIdentifier user() {
+    	return user;
+	}
     
     /**
      * Changes the view of the ClientGUI
@@ -87,7 +83,7 @@ public class ClientController extends SocketHandler {
         clientState = ClientState.PLAYING;
         
         CanvasController canvasController = new CanvasController(strokeProperties, this, packet.canvas());
-        BoardModel newModel = new BoardModel(packet.boardName(), canvasController, packet.users());
+        BoardModel newModel = new BoardModel(packet.boardName(), canvasController, packet.users(), packet.getOwner());
         this.model = newModel;
         this.model.setDrawingControllerDefault();
        
@@ -202,8 +198,7 @@ public class ClientController extends SocketHandler {
     	if (model != null) {
             disconnectFromCurrentBoard();
     	}
-    	 
-		PacketNewBoard packet = new PacketNewBoard(boardName, width, height);
+		PacketNewBoard packet = new PacketNewBoard(boardName, width, height, this.user);
 		sendPacket(packet);
 	}
 	
@@ -216,7 +211,7 @@ public class ClientController extends SocketHandler {
             disconnectFromCurrentBoard();
     	}
     	
-        PacketJoinBoard packet = new PacketJoinBoard(boardName);
+        PacketCanJoinBoard packet = new PacketCanJoinBoard(boardName, this.user);
         sendPacket(packet);
     }
     
@@ -347,6 +342,30 @@ public class ClientController extends SocketHandler {
 	public void receivedJoinBoardPacket(PacketJoinBoard packet) {
 		assert false;
 	}
+
+    /**
+     * Handles receiving a JoinBoardPacket, which should never happen as it's only sent client to server
+     */
+    @Override
+    public void receivedCanJoinBoardPacket(PacketCanJoinBoard packet) {
+		ConfirmDialog dialog = new ConfirmDialog(this.view, "Confirm User Joining Request", packet.user().identifier().name() + " wants to join your board! Would you allow him/her to join?");
+		PacketCanJoinBoardResult result = new PacketCanJoinBoardResult(packet.boardName(), packet.user(), dialog.result());
+		sendPacket(result);
+    }
+
+    /**
+     * Handles receiving a JoinBoardPacket, which should never happen as it's only sent client to server
+     */
+    @Override
+    public void receivedCanJoinBoardResultPacket(PacketCanJoinBoardResult result) {
+		if (model != null) {
+			disconnectFromCurrentBoard();
+		}
+		if (!result.result()) return;
+
+		PacketJoinBoard packet = new PacketJoinBoard(result.boardName(), this.user);
+		sendPacket(packet);
+    }
 	
 	/**
 	 * Returns board width

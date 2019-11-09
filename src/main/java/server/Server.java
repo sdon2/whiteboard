@@ -11,6 +11,7 @@ import java.util.Set;
 
 import models.BoardModel;
 import name.BoardIdentifier;
+import name.ClientIdentifier;
 import name.Identifiable;
 import name.Identifier;
 import packet.Packet;
@@ -88,6 +89,20 @@ public class Server implements Identifiable {
             }
         }
     }
+
+    /**
+     * Broadcast a packet to particular client.
+     * @param packet
+     */
+    public void broadcastPacketToClient(Packet packet, ClientIdentifier client) {
+        synchronized(clients) {
+            for (ServerSocketHandler handler : clients) {
+                if (handler.identifier.id() == client.id()) {
+                    handler.sendPacket(packet);
+                }
+            }
+        }
+    }
     
     /**
      * Creates a packet of all the current Boards known to the server
@@ -116,7 +131,7 @@ public class Server implements Identifiable {
         
         // Create a new model under this boardName.
         CanvasController canvas = new CanvasController(width, height);
-        BoardModel model = new BoardModel(boardName, canvas);
+        BoardModel model = new BoardModel(boardName, canvas, packet.owner());
         addBoard(boardName, model);
         
         return model;

@@ -55,4 +55,3 @@ public class PopupGUI extends JFrame {
     }
 
 }
-

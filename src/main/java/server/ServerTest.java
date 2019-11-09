@@ -30,7 +30,7 @@ import util.TestUtil;
 
 public class ServerTest {
     private static final ClientIdentifier ID = new ClientIdentifier(0, "Name");
-    private static final BoardIdentifier BOARD_ID = new BoardIdentifier(1, "Board Name");
+    private static final BoardIdentifier BOARD_ID = new BoardIdentifier(1, "Board Name", null);
     
     @Before
     public void setUp() {
@@ -51,7 +51,7 @@ public class ServerTest {
             Packet inPacket = TestUtil.nextPacket(in);
             assertTrue(inPacket instanceof PacketBoardIdentifierList);
             
-            packet = new PacketNewBoard(BOARD_ID, 256, 256);
+            packet = new PacketNewBoard(BOARD_ID, 256, 256, null);
             out.writeObject(packet);
             inPacket = TestUtil.nextPacket(in);
             assertTrue(inPacket instanceof PacketBoardModel);

@@ -1,8 +1,13 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 def mainClass = 'client.Client'
+
+application {
+    mainClassName = mainClass
+}
 
 group 'whiteboard'
 version '1.0'

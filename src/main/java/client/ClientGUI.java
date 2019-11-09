@@ -336,7 +336,6 @@ class ClientGUI extends JFrame{
     public void setController(ClientController controller) {
         assert this.controller == null;
         this.controller = controller;
-
     }
 
     /**
@@ -848,7 +847,7 @@ class ClientGUI extends JFrame{
         int result = JOptionPane.showConfirmDialog(null, panel, "Create Board",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
-            BoardIdentifier boardName = new BoardIdentifier(Utils.generateId(), inputBoardName.getText());
+            BoardIdentifier boardName = new BoardIdentifier(Utils.generateId(), inputBoardName.getText(), this.controller.user());
             this.setTitle(title+ " - " + boardName.name());
             controller.generateNewBoard(boardName, Integer.parseInt(widthName.getText()),
                 						Integer.parseInt(heightName.getText()));

@@ -14,6 +14,7 @@ public final class PacketBoardModel extends Packet {
     private final BoardIdentifier boardName;
     private final Canvas canvas;
     private final Identifiable[] users;
+    private Identifiable owner;
     
     /**
      * Constructor that makes a Packet from a BoardModel
@@ -23,7 +24,7 @@ public final class PacketBoardModel extends Packet {
         this.boardName = boardModel.identifier();
         this.canvas = boardModel.canvas();
         this.users = boardModel.users();
- 
+        this.owner = boardModel.getOwner();
     }
     /**
      * Getter method to get the BoardModel
@@ -40,7 +41,11 @@ public final class PacketBoardModel extends Packet {
     public Identifiable[] users() {
         return users;
     }
-    
+
+    public Identifiable getOwner() {
+        return this.owner;
+    }
+
     /**
      * Handler receiving a BoardModelPacket
      * 
