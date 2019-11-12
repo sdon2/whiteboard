@@ -361,8 +361,14 @@ public class ClientController extends SocketHandler {
 		if (model != null) {
 			disconnectFromCurrentBoard();
 		}
-		if (!result.result()) return;
+		if (!result.result()) {
+		    ErrorDialog dialog = new ErrorDialog(this.view, "Request Result", "Owner of this board rejected your request");
+		    dialog.show();
+            this.view.setBoardTitle(this.view.title);
+		    return;
+        }
 
+		this.view.setBoardTitle(result.boardName().name());
 		PacketJoinBoard packet = new PacketJoinBoard(result.boardName(), this.user);
 		sendPacket(packet);
     }

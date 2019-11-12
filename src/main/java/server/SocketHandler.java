@@ -40,6 +40,10 @@ public abstract class SocketHandler
         out = new ObjectOutputStream(socket.getOutputStream());
         in = new ObjectInputStream(socket.getInputStream());
     }
+
+    public BoardModel model() {
+        return model;
+    }
     
     /**
      * Runs the SocketHandler and closes the socket if we ever stop handling the connection or it breaks

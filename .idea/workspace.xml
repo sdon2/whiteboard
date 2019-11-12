@@ -3,21 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="66713c3b-c4ef-45b0-bea9-a74e22cd7e69" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/ClientGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/PopupGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/PopupGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/BoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/BoardModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/name/BoardIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/name/BoardIdentifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packet/PacketBoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packet/PacketBoardModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packet/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packet/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packet/PacketJoinBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packet/PacketJoinBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packet/PacketNewBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packet/PacketNewBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packet/PacketTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packet/PacketTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/ServerSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ServerSocketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ServerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dialogs/ErrorDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dialogs/ErrorDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/SocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/SocketHandler.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

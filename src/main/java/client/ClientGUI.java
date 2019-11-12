@@ -70,9 +70,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
+import dialogs.ErrorDialog;
 import models.BoardModel;
 import models.UserTableModel;
 import name.BoardIdentifier;
+import name.ClientIdentifier;
 import name.Identifiable;
 import name.LayerIdentifier;
 import stroke.StrokeProperties;
@@ -159,7 +161,7 @@ class ClientGUI extends JFrame{
     
     private final JPanel sidebar;
     private final JPanel chatBar;
-    private String title="Whiteboard: Interactive Drawing Tool";
+    public String title="Whiteboard: Interactive Drawing Tool";
     
     private final JTable userTable;
     private final JTextArea chatText;
@@ -857,6 +859,14 @@ class ClientGUI extends JFrame{
     }
     
     private void saveCanvas() {
+        if (controller.model() == null) return;
+        ClientIdentifier user = controller.user();
+        ClientIdentifier owner = controller.model().getBoardName().owner();
+        if (!user.equals(owner)) {
+            ErrorDialog dialog = new ErrorDialog(this, "Error", "Only owner can save the board");
+            dialog.show();
+            return;
+        }
         BufferedImage bi = new BufferedImage(controller.getBoardWidth(), controller.getBoardHeight(), BufferedImage.TYPE_INT_ARGB); 
         Graphics g = bi.createGraphics();
         canvas.paint(g);
@@ -875,8 +885,11 @@ class ClientGUI extends JFrame{
     }
     
     private void joinBoardAction(BoardIdentifier boardName) {
-        this.setTitle(boardName.name());
         controller.connectToBoard(boardName);
+    }
+
+    public void setBoardTitle(String title) {
+        this.setTitle(title);
     }
     
     /**
