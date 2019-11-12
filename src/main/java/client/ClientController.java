@@ -368,7 +368,7 @@ public class ClientController extends SocketHandler {
 		    return;
         }
 
-		this.view.setBoardTitle(result.boardName().name());
+		this.view.setBoardTitle(result.boardName().name() + " : " + this.user.name() + " [CLIENT]");
 		PacketJoinBoard packet = new PacketJoinBoard(result.boardName(), this.user);
 		sendPacket(packet);
     }

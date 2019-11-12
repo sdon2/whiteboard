@@ -850,7 +850,7 @@ class ClientGUI extends JFrame{
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             BoardIdentifier boardName = new BoardIdentifier(Utils.generateId(), inputBoardName.getText(), this.controller.user());
-            this.setTitle(title+ " - " + boardName.name());
+            this.setTitle(title + " - " + boardName.name() + " : " + this.controller.user().name() + " [OWNER]");
             controller.generateNewBoard(boardName, Integer.parseInt(widthName.getText()),
                 						Integer.parseInt(heightName.getText()));
 
